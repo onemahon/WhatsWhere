@@ -51,22 +51,28 @@ public class IntentManager {
 
             if (intent != null) {
                 context.startActivity(intent);
+            } else {
+                showHopperError(view);
             }
         } catch (ActivityNotFoundException e) {
-            if (view != null) {
-                final Snackbar snackbar = Snackbar.make(view, R.string.Snackbar_NoHopper, Snackbar.LENGTH_LONG);
-                snackbar.setAction(R.string.Download, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setData(Uri.parse("market://details?id=com.hopper.mountainview.play"));
-                        context.startActivity(intent);
+            showHopperError(view);
+        }
+    }
 
-                        snackbar.dismiss();
-                    }
-                });
-                snackbar.show();
-            }
+    private static void showHopperError(final View view) {
+        if (view != null) {
+            final Snackbar snackbar = Snackbar.make(view, R.string.Snackbar_NoHopper, Snackbar.LENGTH_LONG);
+            snackbar.setAction(R.string.Download, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse("market://details?id=com.hopper.mountainview.play"));
+                    view.getContext().startActivity(intent);
+
+                    snackbar.dismiss();
+                }
+            });
+            snackbar.show();
         }
     }
 }
