@@ -34,7 +34,7 @@ dependencies {
     compile 'com.android.support:design:23.1.1'
 
     // Other third party libraries
-    compile 'com.azandria:datadude:0.1' // boilerplate & data management
+    compile 'com.azandria:datadude:0.2' // boilerplate & data management
     compile 'com.raizlabs:webservicemanager:1.0' // web requests
     compile 'com.squareup.picasso:picasso:2.5.2' // image loading
 
