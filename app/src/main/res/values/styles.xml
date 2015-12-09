@@ -26,12 +26,6 @@
         <item name="android:scaleType">centerCrop</item>
     </style>
 
-    <!-- android:layout_gravity="bottom"
-                android:fontFamily="sans-serif"
-                android:gravity="center_vertical"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                -->
     <style name="ImageCardTitle">
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:gravity">center_vertical</item>
@@ -39,7 +33,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:minHeight">48dp</item>
-        <item name="android:padding">8dp</item>
+        <item name="android:padding">16dp</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/Card.Title.TextColor</item>
@@ -48,7 +42,7 @@
     <style name="ImageCardContent">
         <item name="android:lineSpacingMultiplier">1.2</item>
         <item name="android:minHeight">48dp</item>
-        <item name="android:padding">8dp</item>
+        <item name="android:padding">16dp</item>
     </style>
 
     <style name="Button.Flat" parent="Base.Widget.AppCompat.Button.Borderless.Colored">
