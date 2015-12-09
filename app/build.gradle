@@ -37,5 +37,4 @@ dependencies {
     compile 'com.azandria:datadude:0.2' // boilerplate & data management
     compile 'com.raizlabs:webservicemanager:1.0' // web requests
     compile 'com.squareup.picasso:picasso:2.5.2' // image loading
-
 }

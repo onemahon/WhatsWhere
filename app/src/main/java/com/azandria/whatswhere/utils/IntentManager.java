@@ -39,11 +39,26 @@ public class IntentManager {
         }
     }
 
+    /**
+     * Start an intent that just parses a String as a Uri and
+     * launches it to the system. Typically will open in web
+     * browser.
+     * @param url The url to attempt to open
+     * @param context A context through which to start the new activity
+     */
     public static void startUrlIntent(String url, Context context) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         context.startActivity(intent);
     }
 
+    /**
+     * Create an intent to open the Hoppe flight finder app. Note:
+     * does not do any pre-filled searching, because being able to
+     * search for a destination in that app depends on the user having
+     * already set up an account.
+     * @param context The context through which to start the new activity.
+     * @param view A view that can be associated with a Snackbar error message.
+     */
     public static void startHopperIntent(final Context context, View view) {
         try {
             PackageManager packageManager = context.getPackageManager();
@@ -58,6 +73,10 @@ public class IntentManager {
             showHopperError(view);
         }
     }
+
+
+    ///////////
+    // region Private Methods
 
     private static void showHopperError(final View view) {
         if (view != null) {
@@ -75,4 +94,7 @@ public class IntentManager {
             snackbar.show();
         }
     }
+
+    // endregion
+    ///////////
 }
