@@ -20,6 +20,7 @@ import com.azandria.whatswhere.R;
 import com.azandria.whatswhere.places.dataRequests.PlaceApiRequestMethod;
 import com.azandria.whatswhere.places.dataRequests.PlaceMemoryRequestMethod;
 import com.azandria.whatswhere.places.list.CardsAdapter;
+import com.azandria.whatswhere.utils.IntentManager;
 import com.raizlabs.coreutils.threading.ThreadingUtils;
 import com.squareup.picasso.Picasso;
 
@@ -133,43 +134,12 @@ public class PlaceFragment extends Fragment {
 
     private void addClickListeners() {
         if (mViewHolder != null) {
-//            mViewHolder.MapsCard.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    IntentManager.startMapIntent(mPlace, v.getContext(), v);
-//                }
-//            });
-//
-//            mViewHolder.HopperCard.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    IntentManager.startHopperIntent(v.getContext(), v);
-//                }
-//            });
-//
-//            mViewHolder.WikipediaCard.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    IntentManager.startUrlIntent(mPlace.mWikipediaUrl, v.getContext());
-//                }
-//            });
-//
-//            mViewHolder.TripAdvisorCard.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    IntentManager.startUrlIntent(mPlace.mTripAdvisorUrl, v.getContext());
-//                }
-//            });
-//
-//            mViewHolder.CIAFactbookCard.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    IntentManager.startUrlIntent(mPlace.mCiaFactbookUrl, v.getContext());
-//                }
-//            });
-//
-//
-//
+            mAdapter.setOnCardClickedListener(new CardsAdapter.OnCardClickedListener() {
+                @Override
+                public void onCardClick(PlaceCard card) {
+                    IntentManager.startUrlIntent(card.mUrl, getActivity(), mViewHolder.RecyclerView);
+                }
+            });
 
             mViewHolder.RefreshButton.setOnClickListener(new View.OnClickListener() {
                 @Override
