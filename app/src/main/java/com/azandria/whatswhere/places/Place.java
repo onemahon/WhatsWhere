@@ -1,7 +1,5 @@
 package com.azandria.whatswhere.places;
 
-import android.net.Uri;
-
 import com.azandria.datadude.data.DataObjectManager;
 
 import org.json.JSONArray;
@@ -19,19 +17,7 @@ public class Place {
 
     public String mName;
     public String mImageUrl;
-
     public List<PlaceCard> mCards;
-
-    public Uri mMapUri;
-
-    public String mWikipediaUrl;
-    public String mWikipediaContent;
-
-    public String mTripAdvisorUrl;
-    public String mTripAdvisorContent;
-
-    public String mCiaFactbookUrl;
-    public String mCiaFactbookContent;
 
     public static Place from(final JSONObject json) {
         // Check the cache, & allow it to create the object internally if it doesn't already exist

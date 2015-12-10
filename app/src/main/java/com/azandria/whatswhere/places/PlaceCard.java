@@ -8,12 +8,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class PlaceCard {
+
     public String mTitle;
     public String mButtonText;
     public String mContent;
     public String mImageUrl;
     public String mUrl;
-
 
     public static List<PlaceCard> fromList(JSONArray array) throws JSONException {
         List<PlaceCard> cards = new LinkedList<>();
