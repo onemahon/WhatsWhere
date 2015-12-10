@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,8 +19,7 @@ import com.azandria.datadude.data.IDataRequestResponse;
 import com.azandria.whatswhere.R;
 import com.azandria.whatswhere.places.dataRequests.PlaceApiRequestMethod;
 import com.azandria.whatswhere.places.dataRequests.PlaceMemoryRequestMethod;
-import com.azandria.whatswhere.utils.IntentManager;
-import com.azandria.whatswhere.views.ImageCard;
+import com.azandria.whatswhere.places.list.CardsAdapter;
 import com.raizlabs.coreutils.threading.ThreadingUtils;
 import com.squareup.picasso.Picasso;
 
@@ -39,6 +40,8 @@ public class PlaceFragment extends Fragment {
 
     private ViewHolder mViewHolder;
     private Place mPlace;
+
+    private CardsAdapter mAdapter;
 
     private IDataRequestResponse<Place> mPlaceResponseListener = new BasicDataRequestResponse<Place>() {
         @Override
@@ -75,6 +78,12 @@ public class PlaceFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        mAdapter = new CardsAdapter();
+        mViewHolder.RecyclerView.setAdapter(mAdapter);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        mViewHolder.RecyclerView.setLayoutManager(layoutManager);
 
         fetchNewPlace();
         addClickListeners();
@@ -118,48 +127,49 @@ public class PlaceFragment extends Fragment {
                 Picasso.with(getContext()).load(mPlace.mImageUrl).into(mViewHolder.ToolbarImage);
             }
 
-            mViewHolder.WikipediaCard.setContent(mPlace.mWikipediaContent);
-            mViewHolder.TripAdvisorCard.setContent(mPlace.mTripAdvisorContent);
-            mViewHolder.CIAFactbookCard.setContent(mPlace.mCiaFactbookContent);
+            mAdapter.setCards(mPlace.mCards);
         }
     }
 
     private void addClickListeners() {
         if (mViewHolder != null) {
-            mViewHolder.MapsCard.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    IntentManager.startMapIntent(mPlace, v.getContext(), v);
-                }
-            });
-
-            mViewHolder.HopperCard.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    IntentManager.startHopperIntent(v.getContext(), v);
-                }
-            });
-
-            mViewHolder.WikipediaCard.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    IntentManager.startUrlIntent(mPlace.mWikipediaUrl, v.getContext());
-                }
-            });
-
-            mViewHolder.TripAdvisorCard.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    IntentManager.startUrlIntent(mPlace.mTripAdvisorUrl, v.getContext());
-                }
-            });
-
-            mViewHolder.CIAFactbookCard.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    IntentManager.startUrlIntent(mPlace.mCiaFactbookUrl, v.getContext());
-                }
-            });
+//            mViewHolder.MapsCard.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    IntentManager.startMapIntent(mPlace, v.getContext(), v);
+//                }
+//            });
+//
+//            mViewHolder.HopperCard.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    IntentManager.startHopperIntent(v.getContext(), v);
+//                }
+//            });
+//
+//            mViewHolder.WikipediaCard.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    IntentManager.startUrlIntent(mPlace.mWikipediaUrl, v.getContext());
+//                }
+//            });
+//
+//            mViewHolder.TripAdvisorCard.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    IntentManager.startUrlIntent(mPlace.mTripAdvisorUrl, v.getContext());
+//                }
+//            });
+//
+//            mViewHolder.CIAFactbookCard.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    IntentManager.startUrlIntent(mPlace.mCiaFactbookUrl, v.getContext());
+//                }
+//            });
+//
+//
+//
 
             mViewHolder.RefreshButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -181,11 +191,7 @@ public class PlaceFragment extends Fragment {
         private CollapsingToolbarLayout Toolbar;
         private ImageView ToolbarImage;
 
-        private ImageCard WikipediaCard;
-        private ImageCard MapsCard;
-        private ImageCard TripAdvisorCard;
-        private ImageCard CIAFactbookCard;
-        private ImageCard HopperCard;
+        private RecyclerView RecyclerView;
 
         private View RefreshButton;
 
@@ -193,11 +199,7 @@ public class PlaceFragment extends Fragment {
             Toolbar = (CollapsingToolbarLayout) view.findViewById(R.id.fragment_place_Toolbar);
             ToolbarImage = (ImageView) view.findViewById(R.id.fragment_place_ToolbarImage);
 
-            WikipediaCard = (ImageCard) view.findViewById(R.id.fragment_place_WikipediaCard);
-            MapsCard = (ImageCard) view.findViewById(R.id.fragment_place_MapsCard);
-            TripAdvisorCard = (ImageCard) view.findViewById(R.id.fragment_place_TripAdvisorCard);
-            CIAFactbookCard = (ImageCard) view.findViewById(R.id.fragment_place_CIAFactbookCard);
-            HopperCard = (ImageCard) view.findViewById(R.id.fragment_place_HopperCard);
+            RecyclerView = (android.support.v7.widget.RecyclerView) view.findViewById(R.id.fragment_place_RecyclerView);
 
             RefreshButton = view.findViewById(R.id.fragment_place_RefreshButton);
         }

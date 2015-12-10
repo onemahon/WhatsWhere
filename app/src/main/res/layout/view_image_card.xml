@@ -38,7 +38,7 @@
             android:visibility="gone" />
 
         <TextView
-            android:id="@+id/view_image_card_Text"
+            android:id="@+id/view_image_card_Button"
             style="@style/Button.Flat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

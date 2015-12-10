@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.azandria.whatswhere.R;
+import com.squareup.picasso.Picasso;
 
 /**
  * A custom implementation of a CardView that just includes a
@@ -22,9 +23,13 @@ public class ImageCard extends CardView {
     // region Member Variables
 
     private int mImageDrawableResource;
+    private String mImageUrl;
     private String mTitle;
     private String mButtonText;
 
+    private ImageView mImage;
+    private TextView mTitleView;
+    private TextView mButtonView;
     private TextView mContentText;
 
     // endregion
@@ -63,6 +68,21 @@ public class ImageCard extends CardView {
         }
     }
 
+    public void setTitle(String title) {
+        mTitle = title;
+        mTitleView.setText(mTitle);
+    }
+
+    public void setButton(String buttonText) {
+        mButtonText = buttonText;
+        mButtonView.setText(mButtonText);
+    }
+
+    public void setImageUrl(String imageUrl) {
+        mImageUrl = imageUrl;
+        loadImage();
+    }
+
     // endregion
     ///////////
 
@@ -73,6 +93,9 @@ public class ImageCard extends CardView {
         LayoutInflater.from(context).inflate(R.layout.view_image_card, this);
 
         mContentText = (TextView) findViewById(R.id.view_image_card_Content);
+        mImage = (ImageView) findViewById(R.id.view_image_card_Image);
+        mTitleView = (TextView) findViewById(R.id.view_image_card_Title);
+        mButtonView = (TextView) findViewById(R.id.view_image_card_Button);
 
         if (attrs != null) {
             TypedArray a = context.getTheme().obtainStyledAttributes(
@@ -88,6 +111,16 @@ public class ImageCard extends CardView {
         }
     }
 
+    private void loadImage() {
+        if (!TextUtils.isEmpty(mImageUrl)) {
+            Picasso.with(getContext()).load(mImageUrl).into(mImage);
+        } else if (mImageDrawableResource != 0) {
+            mImage.setImageResource(mImageDrawableResource);
+        } else {
+            mImage.setImageDrawable(null);
+        }
+    }
+
     // endregion
     ///////////
 
@@ -100,18 +133,15 @@ public class ImageCard extends CardView {
         super.onFinishInflate();
 
         if (mButtonText != null) {
-            TextView button = (TextView) findViewById(R.id.view_image_card_Text);
-            button.setText(mButtonText);
+            mButtonView.setText(mButtonText);
         }
 
         if (mImageDrawableResource != 0) {
-            ImageView image = (ImageView) findViewById(R.id.view_image_card_Image);
-            image.setImageResource(mImageDrawableResource);
+            mImage.setImageResource(mImageDrawableResource);
         }
 
         if (mTitle != null) {
-            TextView title = (TextView) findViewById(R.id.view_image_card_Title);
-            title.setText(mTitle);
+            mTitleView.setText(mTitle);
         }
     }
 

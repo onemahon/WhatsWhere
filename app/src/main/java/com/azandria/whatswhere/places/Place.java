@@ -8,6 +8,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 /**
  * An object representing a particular place in the world.
  */
@@ -17,6 +19,8 @@ public class Place {
 
     public String mName;
     public String mImageUrl;
+
+    public List<PlaceCard> mCards;
 
     public Uri mMapUri;
 
@@ -40,18 +44,10 @@ public class Place {
                 place.mName = json.optString("name");
                 place.mImageUrl = json.optString("image_url");
 
-                place.mWikipediaContent = json.optString("wiki_content");
-                place.mWikipediaUrl = json.optString("wikipedia_url");
-
-                place.mTripAdvisorContent = json.optString("tripadvisor_content");
-                place.mTripAdvisorUrl = json.optString("tripadvisor_url");
-
-                place.mCiaFactbookContent = json.optString("cia_factbook_content");
-                place.mCiaFactbookUrl = json.optString("cia_factbook_url");
-
-                String mapUri = json.optString("map_uri");
-                if (mapUri != null) {
-                    place.mMapUri = Uri.parse(mapUri);
+                try {
+                    place.mCards = PlaceCard.fromList(json.optJSONArray("cards"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
 
                 return place;
