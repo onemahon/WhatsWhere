@@ -26,6 +26,9 @@ public class Place {
     public String mTripAdvisorUrl;
     public String mTripAdvisorContent;
 
+    public String mCiaFactbookUrl;
+    public String mCiaFactbookContent;
+
     public static Place from(final JSONObject json) {
         // Check the cache, & allow it to create the object internally if it doesn't already exist
         return PlaceManager.get().get(json.optInt("id"), new DataObjectManager.FindDelegate<Place>() {
@@ -42,6 +45,9 @@ public class Place {
 
                 place.mTripAdvisorContent = json.optString("tripadvisor_content");
                 place.mTripAdvisorUrl = json.optString("tripadvisor_url");
+
+                place.mCiaFactbookContent = json.optString("cia_factbook_content");
+                place.mCiaFactbookUrl = json.optString("cia_factbook_url");
 
                 String mapUri = json.optString("map_uri");
                 if (mapUri != null) {

@@ -19,6 +19,9 @@
     <string name="View.TripAdvisor.Title">Travel Tips</string>
     <string name="View.TripAdvisor.Button">Open TripAdvisor</string>
 
+    <string name="View.CIAFactbook.Title">Background</string>
+    <string name="View.CIAFactbook.Button">Go to CIA World Factbook</string>
+
     <string name="View.WikipediaCard.Title">General Info</string>
     <string name="View.WikipediaCard.Button">Open Wikipedia</string>
 </resources>

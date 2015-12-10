@@ -107,7 +107,6 @@ public class PlaceFragment extends Fragment {
         new DataRequestBuilder<>(mPlaceResponseListener)
                 .addRequestMethod(new PlaceMemoryRequestMethod(randomPlaceId))
                 .addRequestMethod(new PlaceApiRequestMethod(randomPlaceId))
-//                .addRequestMethod(new PlaceStubbedApiRequestMethod(randomPlaceId))
                 .execute();
     }
 
@@ -121,6 +120,7 @@ public class PlaceFragment extends Fragment {
 
             mViewHolder.WikipediaCard.setContent(mPlace.mWikipediaContent);
             mViewHolder.TripAdvisorCard.setContent(mPlace.mTripAdvisorContent);
+            mViewHolder.CIAFactbookCard.setContent(mPlace.mCiaFactbookContent);
         }
     }
 
@@ -154,6 +154,13 @@ public class PlaceFragment extends Fragment {
                 }
             });
 
+            mViewHolder.CIAFactbookCard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    IntentManager.startUrlIntent(mPlace.mCiaFactbookUrl, v.getContext());
+                }
+            });
+
             mViewHolder.RefreshButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -171,28 +178,25 @@ public class PlaceFragment extends Fragment {
     // region Inner Classes
 
     private static class ViewHolder {
-        private ViewGroup Container;
-
-        // TODO add to toolbar instead
         private CollapsingToolbarLayout Toolbar;
         private ImageView ToolbarImage;
 
         private ImageCard WikipediaCard;
         private ImageCard MapsCard;
         private ImageCard TripAdvisorCard;
+        private ImageCard CIAFactbookCard;
         private ImageCard HopperCard;
 
         private View RefreshButton;
 
         public ViewHolder(View view) {
-            Container = (ViewGroup) view.findViewById(R.id.fragment_place_Container);
-
             Toolbar = (CollapsingToolbarLayout) view.findViewById(R.id.fragment_place_Toolbar);
             ToolbarImage = (ImageView) view.findViewById(R.id.fragment_place_ToolbarImage);
 
             WikipediaCard = (ImageCard) view.findViewById(R.id.fragment_place_WikipediaCard);
             MapsCard = (ImageCard) view.findViewById(R.id.fragment_place_MapsCard);
             TripAdvisorCard = (ImageCard) view.findViewById(R.id.fragment_place_TripAdvisorCard);
+            CIAFactbookCard = (ImageCard) view.findViewById(R.id.fragment_place_CIAFactbookCard);
             HopperCard = (ImageCard) view.findViewById(R.id.fragment_place_HopperCard);
 
             RefreshButton = view.findViewById(R.id.fragment_place_RefreshButton);

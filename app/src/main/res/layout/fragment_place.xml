@@ -27,6 +27,13 @@
                 app:titleText="@string/View.WikipediaCard.Title" />
 
             <com.azandria.whatswhere.views.ImageCard
+                android:id="@+id/fragment_place_CIAFactbookCard"
+                style="@style/ImageCard"
+                app:buttonText="@string/View.CIAFactbook.Button"
+                app:imageDrawableResource="@drawable/card_image_cia"
+                app:titleText="@string/View.CIAFactbook.Title" />
+
+            <com.azandria.whatswhere.views.ImageCard
                 android:id="@+id/fragment_place_TripAdvisorCard"
                 style="@style/ImageCard"
                 app:buttonText="@string/View.TripAdvisor.Button"
